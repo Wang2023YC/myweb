@@ -1,130 +1,127 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>wyc's website</title>
-  <style>
-    /* ===== 基础设置 ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      color: #333;
-      line-height: 1.8;
-      background: #f7f7f7;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王奕晨 · 个人主页</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,900;1,600&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F4EE; --ink:#1C1A16; --muted:#7A7368;
+    --accent:#C63A1D; --line:#DDD6C9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans SC",sans-serif;
+    line-height:1.8; font-size:16px;
+  }
+  ::selection{background:var(--accent);color:#fff}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
 
-    /* ===== 顶部大图区域 ===== */
-    .hero {
-      height: 340px;
-      /* 👇 这里是顶部大背景图，可以换成你自己的图 */
-      background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                        url('https://github.com/user-attachments/assets/e909eac3-c066-4e3c-a158-c7ffdd91eaa1');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-align: center;
-    }
-    .hero h1 { font-size: 42px; letter-spacing: 2px; }
-    .hero p { font-size: 18px; margin-top: 10px; opacity: 0.9; }
+  /* 顶栏 */
+  header{padding:28px 0;border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;justify-content:space-between;align-items:center}
+  .logo{font-family:"Fraunces",serif;font-weight:900;font-size:1.1rem}
+  .logo i{color:var(--accent);font-style:normal}
+  nav{display:flex;gap:20px;font-size:.85rem}
+  nav a{position:relative;color:var(--muted);transition:color .25s}
+  nav a:hover{color:var(--ink)}
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:-3px;width:100%;height:1px;
+    background:var(--accent);transform:scaleX(0);transform-origin:right;
+    transition:transform .3s ease;
+  }
+  nav a:hover::after{transform:scaleX(1);transform-origin:left}
 
-    /* ===== 内容卡片 ===== */
-    .card {
-      max-width: 800px;
-      margin: -60px auto 30px;   /* 负数让卡片往上盖住大图一点，更好看 */
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      padding: 40px;
-      position: relative;
-    }
+  /* 开场 */
+  .hero{padding:110px 0 90px;animation:fadeUp .8s ease both}
+  .hero .hi{color:var(--accent);font-size:.85rem;letter-spacing:.2em;margin-bottom:18px}
+  .hero h1{font-family:"Fraunces","Noto Sans SC",serif;font-weight:900;font-size:clamp(2.6rem,8vw,4.2rem);line-height:1.15}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero p{margin-top:22px;color:var(--muted);max-width:32em}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 
-    /* ===== 头像 ===== */
-    .avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;       /* 圆形 */
-      object-fit: cover;
-      border: 4px solid #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      display: block;
-      margin: 0 auto 15px;
-    }
-    .card h2 { text-align: center; font-size: 24px; margin-bottom: 8px; }
-    .card .bio { text-align: center; color: #666; }
+  /* 区块 */
+  section{padding:70px 0;border-top:1px solid var(--line)}
+  h2{font-family:"Fraunces","Noto Sans SC",serif;font-weight:900;font-size:1.5rem;margin-bottom:28px}
+  h2 span{color:var(--accent);font-size:.75rem;vertical-align:middle;margin-right:10px;letter-spacing:.15em}
+  .about p{color:#3d3830;margin-bottom:14px}
 
-    /* ===== 图片画廊 ===== */
-    .gallery-title {
-      max-width: 800px;
-      margin: 0 auto 15px;
-      font-size: 22px;
-      padding-left: 5px;
-    }
-    .gallery {
-      max-width: 800px;
-      margin: 0 auto 40px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);  /* 一行两张图 */
-      gap: 15px;
-    }
-    .gallery img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-    .gallery img:hover { transform: scale(1.03); }  /* 鼠标放上去轻微放大 */
+  /* 联系 */
+  .contact .mail{
+    display:inline-block;font-family:"Fraunces",serif;font-weight:600;
+    font-size:clamp(1.3rem,4.5vw,2rem);
+    border-bottom:2px solid var(--ink);padding-bottom:4px;
+    transition:color .25s,border-color .25s;
+  }
+  .contact .mail:hover{color:var(--accent);border-color:var(--accent)}
+  .socials{margin-top:30px;display:flex;gap:22px;font-size:.85rem}
+  .socials a{color:var(--muted);transition:color .25s}
+  .socials a:hover{color:var(--accent)}
 
-    /* ===== 页脚 ===== */
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #999;
-      font-size: 14px;
-    }
-    /*footer a { color: #e8743b; text-decoration: none; }*/
+  footer{padding:30px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.8rem}
+  footer .wrap{display:flex;justify-content:space-between}
 
-    /* 手机上变成一行一张图 */
-    @media (max-width: 600px) {
-      .gallery { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 30px; }
-    }
-  </style>
+  @media(max-width:560px){
+    nav{gap:14px}
+    .hero{padding:70px 0 60px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+</style>
 </head>
 <body>
 
-  <!-- ===== 顶部大图 + 标题 ===== -->
-  <div class="hero">
-    <h1>Hello,I'm Wang Yichen</main></h1>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">王奕晨<i>.</i></a>
+    <nav>
+      <a href="#about">关于</a>
+      <a href="#contact">联系</a>
+    </nav>
   </div>
+</header>
 
-  <!-- ===== 关于我（头像 + 简介） ===== -->
-  <div class="card">
-    <!-- 👇 这是头像图片，可以换成你自己的照片 -->
-    <img class="avatar" src="https://github.com/user-attachments/assets/dd693439-ce00-484c-ad68-7d7c8f8f8770" alt="我的头像">
-    <h2>This is my personal website.</h2>
+<main id="top">
+  <div class="wrap">
+
+    <div class="hero">
+      <p class="hi">你好,我是</p>
+      <h1>王奕晨,<br>一名<em>高中生</em>。<br>就读于江西省南康中学。</h1>
+      <p>我是一个热爱学习和探索的高中生，对技术和设计充满热情。</p>
+    </div>
+
+    <section class="about" id="about">
+      <h2><span>01</span>关于我</h2>
+      <p>我喜欢在技术和设计的世界中不断探索和学习。无论是编写代码还是设计界面，我都乐于挑战自我，追求卓越。我相信通过不断的努力和实践，我能够在未来的道路上取得更大的成就。
+      </p>
+      <p>常用技术:HTML,c++</p>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2><span>02</span>联系我</h2>
+      <p style="color:var(--muted);margin-bottom:24px">也许只是打个招呼 ——</p>
+      <a class="mail" href="mailto:393181509@qq.com">393181509@qq.com</a>
+      <div class="socials">
+        <a href="https://github.com/wangyichen2026">GitHub ↗</a>
+        <a href="https://space.bilibili.com/1454461780">Bilibili ↗</a>
+      </div>
+    </section>
+
   </div>
+</main>
 
-  <!-- ===== 图片画廊 ===== -->
-  <h3 class="gallery-title">pictures</h3>
-  <div class="gallery">
-    <!-- 👇 下面这四张图都可以换成你自己的 -->
-    <img src="https://github.com/user-attachments/assets/d2576a77-7d65-4262-874a-f963c8d66d60" alt="照片1">
-    <img src="https://github.com/user-attachments/assets/acedc9cc-9b76-4a0f-95d3-5024cc7edac2" alt="照片2">
-    <img src="https://github.com/user-attachments/assets/0b9daa74-94ac-4dff-a37d-86cc4adbe2ec" alt="照片3">
-    <img src="https://github.com/user-attachments/assets/d2f0e4e8-4749-48c5-ac02-9bc6f9fedd6d" alt="照片4">
+<footer>
+  <div class="wrap">
+    <span>© 2026 王奕晨</span>
+    <span>江西南康</span>
   </div>
-
-  <!-- ===== 页脚联系方式 ===== -->
-  <footer>
-    <p>© 2026 我的个人网站 · 欢迎联系我：<a>393181509@qq.com</a></p>
-  </footer>
+</footer>
 
 </body>
 </html>
